@@ -76,13 +76,32 @@ def edge_ok(text, path):
     return False
 
 
+_piper_variant = None
+
+
 def piper_synth(text, path):
+    """Run Piper via `python -m piper` (works across piper-tts versions)."""
+    global _piper_variant
     wav = path.with_suffix(".piper.wav")
-    p = subprocess.run(["piper", "--model", PIPER_MODEL, "--length_scale", PIPER_SCALE,
-                        "--output_file", str(wav)],
-                       input=text, capture_output=True, text=True)
-    if p.returncode or not wav.exists() or wav.stat().st_size < 1000:
-        sys.exit("Piper TTS failed:\n" + p.stderr[-1500:])
+    base = [sys.executable, "-m", "piper"]
+    variants = [
+        ["-m", PIPER_MODEL, "-f", str(wav), "--length-scale", PIPER_SCALE],
+        ["--model", PIPER_MODEL, "--output_file", str(wav), "--length_scale", PIPER_SCALE],
+        ["-m", PIPER_MODEL, "-f", str(wav)],
+    ]
+    order = ([_piper_variant] if _piper_variant is not None else []) + \
+            [v for v in range(len(variants)) if v != _piper_variant]
+    err = ""
+    for v in order:
+        if wav.exists():
+            wav.unlink()
+        p = subprocess.run(base + variants[v], input=text, capture_output=True, text=True)
+        if p.returncode == 0 and wav.exists() and wav.stat().st_size > 1000:
+            _piper_variant = v
+            break
+        err = p.stderr[-1200:]
+    else:
+        sys.exit("Piper TTS failed:\n" + err)
     ff("-i", wav, "-ar", "48000", "-ac", "1", "-c:a", "libmp3lame", "-q:a", "2", path)
     wav.unlink()
 
