@@ -1,0 +1,75 @@
+{
+  "title": "Black Holes: Beyond the Event Horizon",
+  "chapters": [
+    {
+      "title": "Prologue",
+      "head": 6.0,
+      "tail": 0.8,
+      "queries": ["black hole", "space universe", "galaxy stars", "nebula"],
+      "text": "Somewhere in the dark between the stars, there are places where the rules of our everyday world simply stop. Places where gravity becomes so strong that nothing, not even light, can escape. We call them black holes. They are invisible, silent, and utterly unforgiving. And yet, they shape galaxies, bend space and time, and hold some of the deepest secrets of the universe. For more than a century, scientists have chased these objects through mathematics, through telescopes, and through the ripples of spacetime itself. Tonight, we follow that trail. We will travel to the very edge of a black hole, cross the point of no return, and ask the question that still haunts physics. What really lies beyond the event horizon?"
+    },
+    {
+      "title": "Born from Dying Stars",
+      "head": 1.2,
+      "tail": 0.8,
+      "queries": ["supernova", "star explosion", "nebula space", "stars"],
+      "text": "Every black hole begins with a story of gravity winning a very long war. A star spends millions of years balanced between two forces. Nuclear fusion in its core pushes outward, while its own enormous weight pulls inward. But fuel does not last forever. When a star many times heavier than our Sun runs out of fuel, the balance breaks. In less than a second, the core collapses under its own weight. The outer layers rebound in a titanic explosion called a supernova, shining brighter than an entire galaxy. What remains of the core is crushed beyond anything we can imagine. If enough mass is squeezed into a small enough space, nothing in the universe can stop the collapse. A black hole is born."
+    },
+    {
+      "title": "The Point of No Return",
+      "head": 1.2,
+      "tail": 0.8,
+      "queries": ["black hole", "event horizon", "space dark", "wormhole"],
+      "text": "Around every black hole lies an invisible boundary known as the event horizon. It is not a surface you could touch. It is a threshold in space. Outside it, a rocket with enough power could still escape. Inside it, every possible path leads inward. The reason is simple, and terrifying. Beyond the horizon, the speed needed to escape becomes greater than the speed of light, and nothing can travel faster than light. The size of the horizon depends only on the mass. For a black hole with the mass of our Sun, it would be about six kilometres across. Imagine squeezing an entire star into the size of a small city. That is the scale of the monster we are describing."
+    },
+    {
+      "title": "Einstein's Warped Universe",
+      "head": 1.2,
+      "tail": 0.8,
+      "queries": ["gravity space", "earth orbit", "planets solar system", "universe"],
+      "text": "To understand why, we need Albert Einstein. In 1915, he showed that gravity is not a force pulling through empty space. Instead, mass bends space and time together, like a heavy ball resting on a stretched sheet. Planets orbit the Sun because they follow the curves in that sheet. Just months later, Karl Schwarzschild solved Einstein's equations and discovered something strange. If mass is packed tightly enough, the curvature becomes infinite at the centre, a point we call a singularity. Einstein himself doubted that such objects could really exist. It would take decades of work, and the discoveries of astronomers, to prove that nature had been more imaginative than he expected."
+    },
+    {
+      "title": "Where Time Slows Down",
+      "head": 1.2,
+      "tail": 0.8,
+      "queries": ["clock time", "time lapse stars", "space time", "hourglass"],
+      "text": "Near a black hole, time itself behaves strangely. Gravity stretches time, so a clock close to the horizon ticks more slowly than a clock far away. Imagine an astronaut hovering near the edge while a friend watches from a safe distance. To the astronaut, everything feels normal. But to the distant friend, the astronaut moves slower and slower, and their light becomes redder and fainter. As they approach the horizon, they seem to freeze, fading away without ever quite crossing. This is not an illusion of the eyes. It is a real difference in how time flows. And it has been measured, in tiny amounts, with atomic clocks here on Earth, and on satellites orbiting above us."
+    },
+    {
+      "title": "Falling In",
+      "head": 1.2,
+      "tail": 0.8,
+      "queries": ["astronaut space", "spaceship", "tunnel light", "black hole"],
+      "text": "So what would it feel like to fall in? For a small black hole, the answer is brutal. Gravity pulls much harder on your feet than on your head, stretching you into a long thin strand. Physicists have a name for it, spaghettification. But for a giant black hole, the horizon is so large that the tidal forces there are gentle. You could cross the line without noticing anything at all. There would be no wall, no flash, no warning. Only a quiet, one way door. Yet from that moment, your future points inward. Every direction you could move leads to the centre. Time and space have swapped their roles, and the singularity is no longer a place. It is a moment waiting for you."
+    },
+    {
+      "title": "Giants of the Galaxies",
+      "head": 1.2,
+      "tail": 0.8,
+      "queries": ["milky way", "galaxy", "galaxy rotation", "star cluster"],
+      "text": "Black holes come in many sizes. Stellar black holes weigh a few to a few dozen times our Sun, and our galaxy may hold millions of them. But at the heart of almost every large galaxy sits something far bigger, a supermassive black hole. At the centre of our own Milky Way, about twenty six thousand light years away, lies Sagittarius A star. It holds roughly four million times the mass of the Sun. Astronomers proved it by tracking stars racing around an empty looking point at thousands of kilometres per second. In other galaxies, the giants are even larger, some weighing billions of Suns. They may have helped shape how galaxies grow, switching star formation on and off across cosmic time."
+    },
+    {
+      "title": "Seeing the Unseeable",
+      "head": 1.2,
+      "tail": 0.8,
+      "queries": ["telescope", "radio telescope", "observatory", "scientist laboratory"],
+      "text": "A black hole gives off no light, so how do we see one? We watch what happens around it. Gas falling inward is squeezed and heated to millions of degrees, and it glows brightly in X rays before it vanishes. In 2015, the LIGO detectors in the United States felt something new, a tiny ripple in spacetime from two black holes colliding more than a billion light years away. Gravitational waves had finally been heard. Then, in 2019, the Event Horizon Telescope, a network of radio dishes spanning the planet, captured the first image of a black hole, a glowing ring around a shadow in the galaxy Messier 87. In 2022, it revealed the same kind of shadow at the heart of our own galaxy."
+    },
+    {
+      "title": "Hawking and the Paradox",
+      "head": 1.2,
+      "tail": 0.8,
+      "queries": ["quantum particles", "abstract light", "physics", "energy waves"],
+      "text": "Black holes are not only an astronomical mystery. They are a crisis for physics. In 1974, Stephen Hawking showed that when quantum physics is added to the picture, black holes are not perfectly black. They slowly leak a faint glow, now called Hawking radiation, and over unimaginable ages they can evaporate completely. But this raises a deep question. If a black hole vanishes, what happens to everything that fell inside? Quantum theory says information can never be destroyed. Yet the radiation seems to carry no trace of it. This is the information paradox, and it has driven some of the most brilliant minds in science for half a century. Many believe the answer will unite gravity and quantum mechanics in a single theory."
+    },
+    {
+      "title": "Beyond the Horizon",
+      "head": 1.2,
+      "tail": 7.0,
+      "queries": ["cosmos", "universe", "nebula", "night sky stars"],
+      "text": "So what lies beyond the event horizon? Honestly, we do not know. Our best theories break down at the singularity, where gravity becomes so extreme that space and time may no longer make sense. Some physicists suggest the centre is not a point at all, but a doorway to something new. Others imagine information written on the horizon itself, like a hologram. Every answer so far is an idea waiting for evidence. And evidence is coming, from sharper images, from more gravitational waves, from the next generation of telescopes. Black holes remind us that the universe is far stranger than our instincts expect, and that the greatest discoveries often begin at the edge of what we can see. Thank you for watching."
+    }
+  ]
+}
