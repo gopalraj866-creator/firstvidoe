@@ -55,24 +55,60 @@ def dur(path):
 
 
 # ----------------------------------------------------------------- narration
-async def synth_all(jobs):
-    sem = asyncio.Semaphore(4)
+PIPER_MODEL = os.environ.get("PIPER_MODEL", "models/en_US-ryan-high.onnx")
+PIPER_SCALE = os.environ.get("PIPER_SCALE", "1.08")   # >1 = slower, calmer documentary pace
+TTS = os.environ.get("TTS", "auto")                    # auto | edge | piper
 
-    async def one(text, path):
-        if path.exists() and path.stat().st_size > 1000:
-            return
-        async with sem:
-            for i in range(6):
-                try:
-                    await edge_tts.Communicate(text, VOICE, rate=RATE).save(str(path))
-                    if path.stat().st_size > 1000:
-                        return
-                except Exception as e:  # network hiccup / throttling
-                    print("tts retry:", e)
-                    await asyncio.sleep(2 * (i + 1))
-            sys.exit("TTS failed for: " + text[:60])
 
-    await asyncio.gather(*(one(t, p) for t, p in jobs))
+def edge_ok(text, path):
+    """Try Microsoft neural voice once (a few retries). Returns True on success."""
+    async def go():
+        await edge_tts.Communicate(text, VOICE, rate=RATE).save(str(path))
+
+    for i in range(3):
+        try:
+            asyncio.run(go())
+            if path.exists() and path.stat().st_size > 1000:
+                return True
+        except BaseException as e:  # blocked IP / throttling / network
+            print(f"edge-tts failed ({type(e).__name__}): {e}")
+            time.sleep(2 * (i + 1))
+    return False
+
+
+def piper_synth(text, path):
+    wav = path.with_suffix(".piper.wav")
+    p = subprocess.run(["piper", "--model", PIPER_MODEL, "--length_scale", PIPER_SCALE,
+                        "--output_file", str(wav)],
+                       input=text, capture_output=True, text=True)
+    if p.returncode or not wav.exists() or wav.stat().st_size < 1000:
+        sys.exit("Piper TTS failed:\n" + p.stderr[-1500:])
+    ff("-i", wav, "-ar", "48000", "-ac", "1", "-c:a", "libmp3lame", "-q:a", "2", path)
+    wav.unlink()
+
+
+def synth_all(jobs):
+    todo = [(t, p) for t, p in jobs if not (p.exists() and p.stat().st_size > 1000)]
+    if not todo:
+        return
+    engine = TTS
+    if engine in ("auto", "edge"):
+        if edge_ok(*todo[0]):
+            engine = "edge"
+        elif TTS == "edge":
+            sys.exit("edge-tts failed and TTS=edge was forced")
+        else:
+            print("edge-tts unavailable here, switching to Piper for the whole film")
+            engine = "piper"
+            todo = list(todo)  # voice must be consistent: redo everything with Piper
+    print("TTS engine:", engine)
+    if engine == "edge":
+        for t, p in todo[1:]:
+            if not edge_ok(t, p):
+                sys.exit("edge-tts failed mid-run for: " + t[:60])
+    else:
+        for t, p in todo:
+            piper_synth(t, p)
 
 
 def silence(sec):
@@ -93,7 +129,7 @@ def build_narration(chapters):
             jobs.append((s, p))
             paths.append(p)
         plan.append((sents, paths))
-    asyncio.run(synth_all(jobs))
+    synth_all(jobs)
 
     results = []
     for ci, ch in enumerate(chapters):
