@@ -28,7 +28,11 @@ jobs:
         run: |
           sudo apt-get update
           sudo apt-get install -y ffmpeg fonts-dejavu-core
-          pip install edge-tts requests
+          pip install --upgrade edge-tts requests piper-tts
+          mkdir -p models
+          B=https://huggingface.co/rhasspy/piper-voices/resolve/main/en/en_US/ryan/high
+          curl -fL --retry 4 -o models/en_US-ryan-high.onnx "$B/en_US-ryan-high.onnx"
+          curl -fL --retry 4 -o models/en_US-ryan-high.onnx.json "$B/en_US-ryan-high.onnx.json"
 
       - name: Build video
         env:
