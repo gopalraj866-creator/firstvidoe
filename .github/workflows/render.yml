@@ -1,0 +1,54 @@
+name: Render documentary
+
+on:
+  workflow_dispatch:
+    inputs:
+      voice:
+        description: "edge-tts voice"
+        default: "en-US-GuyNeural"
+      rate:
+        description: "Speech rate (e.g. -6%)"
+        default: "-6%"
+
+permissions:
+  contents: write
+
+jobs:
+  render:
+    runs-on: ubuntu-latest
+    timeout-minutes: 120
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install ffmpeg, fonts, Python deps
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y ffmpeg fonts-dejavu-core
+          pip install edge-tts requests
+
+      - name: Build video
+        env:
+          PIXABAY_API_KEY: ${{ secrets.PIXABAY_API_KEY }}
+          VOICE: ${{ inputs.voice }}
+          RATE: ${{ inputs.rate }}
+        run: python build.py
+
+      - name: Upload result
+        uses: actions/upload-artifact@v4
+        with:
+          name: black-holes-documentary
+          path: out/
+          retention-days: 14
+
+      - name: Publish to GitHub Release
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: documentary-${{ github.run_number }}
+          name: Black Holes - Beyond the Event Horizon (build ${{ github.run_number }})
+          files: |
+            out/black_holes_beyond_the_event_horizon.mp4
+            out/subtitles.srt
